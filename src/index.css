@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ivory: #FAF3ED;
+  --color-peach: #F6E6D7;
+  --color-sand: #EEDFCC;
+  --color-apricot: #FADFC4;
+  --color-offwhite: #F5F1EB;
+  --color-ink: #30251F;
+  --color-muted: #78685D;
+  --color-terra: #B85F42;
+  --color-terra-dark: #9A4A31;
+  --color-line: #E8DCD0;
+  --font-sans: "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Manrope", "DM Sans", ui-sans-serif, system-ui, sans-serif;
+  --shadow-soft: 0 1px 2px rgb(48 37 31 / 0.05), 0 8px 24px -12px rgb(48 37 31 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(48 37 31 / 0.06), 0 18px 36px -16px rgb(48 37 31 / 0.22);
+}
+
+html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+body {
+  margin: 0; background: var(--color-ivory); color: var(--color-ink);
+  font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden;
+}
+h1, h2, h3, h4 { font-family: var(--font-heading); letter-spacing: -0.02em; }
+:focus-visible { outline: 3px solid var(--color-terra); outline-offset: 3px; border-radius: 6px; }
+
+.blueprint-grid {
+  background-image:
+    linear-gradient(to right, rgb(184 95 66 / 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(184 95 66 / 0.09) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 70% 40%, black 30%, transparent 75%);
+}
+
+@keyframes rise { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+@keyframes drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes spin-slow { to { transform: rotate(360deg); } }
+@keyframes dash { to { stroke-dashoffset: -24; } }
+
+.hero-rise { animation: rise .8s cubic-bezier(.2,.7,.2,1) both; }
+.d1 { animation-delay: .08s; } .d2 { animation-delay: .18s; } .d3 { animation-delay: .28s; } .d4 { animation-delay: .4s; }
+.float { animation: drift 6s ease-in-out infinite; }
+.spin-slow { animation: spin-slow 40s linear infinite; transform-origin: center; transform-box: fill-box; }
+.flow { animation: dash 2.4s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition-duration: .01ms !important; }
+}
+
+/* Flip cards (mentors) */
+.flip-scene { perspective: 1200px; }
+.flip-inner { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .7s cubic-bezier(.3,.7,.2,1); }
+.flip-scene[data-flipped="true"] .flip-inner { transform: rotateY(180deg); }
+.flip-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+.flip-back { transform: rotateY(180deg); }
